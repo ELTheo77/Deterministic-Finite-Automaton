@@ -2,9 +2,6 @@
 
 using namespace std;
 
-ifstream fin("FSA.in");
-ofstream fout("FSA.out");
-
 string line;
 int stareCurenta;
 vector<string> sigma;
@@ -22,7 +19,7 @@ struct FSA_data
     bool si;
 }tranzitii[1000];
 
-void prelucrareSigma()
+void prelucrareSigma(ifstream& fin)
 {
     while(getline(fin, line))
     {
@@ -32,7 +29,7 @@ void prelucrareSigma()
     //for(int i=0; i<sigma.size(); i++) fout << sigma[i] << "\n";
 }
 
-void prelucrareStates()
+void prelucrareStates(ifstream& fin)
 {
     while(getline(fin, line))
     {
@@ -50,7 +47,7 @@ void prelucrareStates()
     //for(int i=0; i<states.size(); i++) fout << states[i] << "\n";
 }
 
-void prelucrareTransitions()
+void prelucrareTransitions(ifstream& fin)
 {
     int index = 0;
     while(getline(fin, line))
@@ -70,7 +67,7 @@ void prelucrareTransitions()
     }
 }
 
-bool fsaVerificare()
+bool fsaVerificare(ofstream& fout)
 {
     for(int i=0; i<1000; i++)
     {
@@ -118,7 +115,7 @@ bool fsaVerificare()
     return 1;
 }
 
-void fsaCitire()
+void fsaCitire(ifstream& fin)
 {
     getline(fin, line);
     while(line[0] == '#') getline(fin, line);
@@ -127,19 +124,19 @@ void fsaCitire()
         while(line[0] == '#') getline(fin, line);
         if(line == "Sigma:") 
         {
-            prelucrareSigma();
+            prelucrareSigma(fin);
             if(i != 2) getline(fin, line);
             while(line[0] == '#') getline(fin, line);
         }
         else if(line == "States:") 
         {
-            prelucrareStates();
+            prelucrareStates(fin);
             if(i != 2) getline(fin, line);
             while(line[0] == '#') getline(fin, line);
         }
         else if(line == "Transitions:") 
         {
-            prelucrareTransitions();
+            prelucrareTransitions(fin);
             if(i != 2) getline(fin, line);
             while(line[0] == '#') getline(fin, line);
         }

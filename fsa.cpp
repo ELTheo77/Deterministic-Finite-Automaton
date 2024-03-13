@@ -5,9 +5,15 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    fsaCitire();
+    string input, output;
+    cout << "Enter input and output files: ";
+    cin >> input >> output;
+    ifstream fin(input);
+    ofstream fout(output);
 
-    if(fsaVerificare())
+    fsaCitire(fin);
+
+    if(fsaVerificare(fout))
     {
         try
         {
